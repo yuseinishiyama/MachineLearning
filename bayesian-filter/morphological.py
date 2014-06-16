@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import urllib
-import urllib2
+import urllib3
 from BeautifulSoup import BeautifulSoup
 
-appid = dj0zaiZpPVluZUthQzFlVFpXTiZzPWNvbnN1bWVyc2VjcmV0Jng9NWQ-
+appid = "dj0zaiZpPVluZUthQzFlVFpXTiZzPWNvbnN1bWVyc2VjcmV0Jng9NWQ-"
 pageurl = "http://jlp.yahooapis.jp/MAService/V1/parse"
 
 def split(sentence, appid=appid, result="ma", filter="1|2|3|4|5|9|10"):
