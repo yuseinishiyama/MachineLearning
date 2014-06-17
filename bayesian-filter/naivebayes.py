@@ -40,11 +40,6 @@ class NaiveBayse:
             self.wordcountup(w, cat)
         self.catcountup(cat)
 
-    def getwords(doc):
-        "文章から単語を抽出"
-        words = [s.lower() for s in morphological.split(doc)]
-        return  tuple(w for w in words)
-
     def prioprob(self, cat):
         "あるカテゴリの生起す確率。P(cat)"
         return float(self.catcount[cat]) / sum(self.catcount.values())
@@ -72,14 +67,16 @@ class NaiveBayse:
 
         for cat in self.catcount.keys():
             prob = self.score(word, cat)
-            if prob < max:
+            if prob > max:
                 max = prob
                 best = cat
 
         return best
 
-
-
+def getwords(doc):
+    "文章から単語を抽出"
+    words = [s.lower() for s in morphological.split(doc)]
+    return  tuple(w for w in words)
 
 if __name__ == "__main__":
     nb = NaiveBayse()
@@ -94,6 +91,7 @@ Unicode による文字列操作をサポートしており，日本語処理も
     nb.train(u'''豊富な機械学習（きかいがくしゅう，Machine learning）とは，人工知能における研究課題の一つで，人間が自然に行っている学習能力と同様の機能をコンピュータで実現させるための技術・手法のことである。ある程度の数のサンプルデータ集合を対象に解析を行い，そのデータから有用な規則，ルール，知識表現，判断基準などを抽出する。データ集合を解析するため，統計学との関連も非常に深い。
 機械学習は検索エンジン，医療診断，スパムメールの検出，金融市場の予測，DNA配列の分類，音声認識や文字認識などのパターン認識，ゲーム戦略，ロボット，など幅広い分野で用いられている。応用分野の特性に応じて学習手法も適切に選択する必要があり，様々な手法が提案されている。それらの手法は， Machine Learning や IEEE Transactions on Pattern Analysis and Machine Intelligence などの学術雑誌などで発表されることが多い。''', u'機械学習')
 
+    
     #Python
     words = u'ヴァンロッサム氏によって開発されました.'
     print(u'%s => 推定カテゴリ: %s' % (words ,nb.classifier(words)))
